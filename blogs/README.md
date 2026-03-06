@@ -18,18 +18,9 @@
   Showcase of all the learning I did through reading, understanding and writing the blogs for future devs.
 </p>
 
-[Why Version Control Exists: The Pendrive Problem](https://sharmadipali14.hashnode.dev/why-version-control-exists-the-pendrive-problem)
+[Git for Beginners: Basics and Essential Commands](https://sharmadipali14.hashnode.dev/git-for-beginners-basics-and-essential-commands)
 
   <a href="https://sharmadipali14.hashnode.dev/why-version-control-exists-the-pendrive-problem">
-      <p align="center">
-      <img width = "500px" alt="Why Version Control Exists: The Pendrive Problem" src="./assets/Pendrive-problem.webp">
-    <p>
-  </a>
-
-  <br>
-  
-  [Git for Beginners: Basics and Essential Commands](https://sharmadipali14.hashnode.dev/git-for-beginners-basics-and-essential-commands)
-  <a href="https://sharmadipali14.hashnode.dev/git-for-beginners-basics-and-essential-commands">
       <p align="center">
       <img width = "500px" alt="Git for Beginners: Basics and Essential Commands" src="assets/git-bigginers.webp">
     <p>
