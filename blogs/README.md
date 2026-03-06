@@ -101,7 +101,6 @@
 [Understanding HTML Tags and Elements](https://sharmadipali14.hashnode.dev/understanding-html-tags-and-elements)
 <a href="https://sharmadipali14.hashnode.dev/understanding-html-tags-and-elements">
 
-<p align="center">
 <img width = "500px" alt="Understanding HTML Tags and Elements" src="./assets/html.webp">
 <p>
 </a>
@@ -112,6 +111,7 @@
 <a href="https://sharmadipali14.hashnode.dev/css-selectors-101-targeting-elements-with-precision">
 
 <p align="center">
+
 <img width = "500px" alt="CSS Selectors 101: Targeting Elements with Precision" src="./assets/css.webp">
 <p>
 </a>
@@ -158,3 +158,41 @@
 </a>
 
 <br>
+
+[Understanding Variables and Data Types in JavaScript](https://sharmadipali14.hashnode.dev/understanding-variables-and-data-types-in-javascript)
+<a href="https://sharmadipali14.hashnode.dev/javascript-beginner-friendly-part-1">
+
+<p align="center">
+<img width = "500px" alt="JavaScript Beginner Friendly : Part-1m" src="./assets/variable-datatype.png">
+<p>
+</a>
+
+<br>
+
+[Understanding Promise in JavaScript](https://sharmadipali14.hashnode.dev/understandingpromise-in-javascript)
+<a href="https://sharmadipali14.hashnode.dev/javascript-beginner-friendly-part-1">
+
+<p align="center">
+<img width = "500px" alt="JavaScript Beginner Friendly : Part-1m" src="./assets/promises.png">
+<p>
+</a>
+
+<br>
+
+[JavaScript Operators](https://sharmadipali14.hashnode.dev/javascript-operators)
+<a href="https://sharmadipali14.hashnode.dev/javascript-beginner-friendly-part-1">
+
+<p align="center">
+<img width = "500px" alt="JavaScript Beginner Friendly : Part-1m" src="./assets/JavaScript Operators.png">
+<p>
+</a>
+
+<br>
+
+[Control Flow in JavaScript: If, Else, and Switch Explained](harmadipali14.hashnode.dev/control-flow-in-javascript-if-else-and-switch-explained)
+<a href="https://sharmadipali14.hashnode.dev/javascript-beginner-friendly-part-1">
+
+<p align="center">
+<img width = "500px" alt="JavaScript Beginner Friendly : Part-1m" src="./assets/conditional.png">
+<p>
+</a>
