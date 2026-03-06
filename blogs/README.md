@@ -108,10 +108,10 @@
 
 <br>
 
-[Understanding HTML Tags and Elements](https://sharmadipali14.hashnode.dev/understanding-html-tags-and-elements)
-<a href="https://sharmadipali14.hashnode.dev/understanding-html-tags-and-elements">
+[CSS Selectors 101: Targeting Elements with Precision](https://sharmadipali14.hashnode.dev/css-selectors-101-targeting-elements-with-precision)
+<a href="https://sharmadipali14.hashnode.dev/css-selectors-101-targeting-elements-with-precision">
 
-<img width = "500px" alt="Understanding HTML Tags and Elements" src="./assets/css.webp">
+<img width = "500px" alt="CSS Selectors 101: Targeting Elements with Precision" src="./assets/css.webp">
 <p>
 </a>
 
@@ -120,19 +120,7 @@
 [TCP vs UDP: When to Use What, and How TCP Relates to HTTP](https://sharmadipali14.hashnode.dev/tcp-vs-udp-when-to-use-what-and-how-tcp-relates-to-http)
 <a href="https://sharmadipali14.hashnode.dev/tcp-vs-udp-when-to-use-what-and-how-tcp-relates-to-http">
 
-<p align="center">
 <img width = "500px" alt="TCP vs UDP: When to Use What, and How TCP Relates to HTTP" src="./assets/TCP-UDP.webp">
-<p>
-</a>
-
-<br>
-
-[TCP Working: 3-Way Handshake & Reliable Communication
-](https://sharmadipali14.hashnode.dev/tcp-working-3-way-handshake-and-reliable-communication)
-<a href="https://sharmadipali14.hashnode.dev/tcp-working-3-way-handshake-and-reliable-communication">
-
-<p align="center">
-<img width = "500px" alt="TCP Working: 3-Way Handshake & Reliable Communication" src="assets/TCP-3wayhandsheck.webp">
 <p>
 </a>
 
