@@ -188,3 +188,12 @@
 </a>
 
 <br>
+
+[Function Declaration vs Function Expression: What’s the Difference?](https://sharmadipali14.hashnode.dev/function-declaration-vs-function-expression-what-s-the-difference)
+<a href="https://sharmadipali14.hashnode.dev/function-declaration-vs-function-expression-what-s-the-difference">
+
+<img width = "500px" alt="Function Declaration vs Function Expression: What’s the Difference?" src="assets/function.png">
+<p>
+</a>
+
+<br>
