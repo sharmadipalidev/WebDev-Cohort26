@@ -197,3 +197,12 @@
 </a>
 
 <br>
+
+[Arrow Functions in JavaScript: A Simpler Way to Write Functions](https://sharmadipali14.hashnode.dev/arrow-functions-in-javascript-a-simpler-way-to-write-functions)
+<a href="https://sharmadipali14.hashnode.dev/arrow-functions-in-javascript-a-simpler-way-to-write-functions">
+
+<img width = "500px" alt="Arrow Functions in JavaScript: A Simpler Way to Write Functions" src="assets/arrow function.png">
+<p>
+</a>
+
+<br>
