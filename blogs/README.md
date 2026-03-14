@@ -224,3 +224,30 @@
 </a>
 
 <br>
+
+[Understanding Objects in JavaScript](https://sharmadipali14.hashnode.dev/understanding-objects-in-javascript)
+<a href="https://sharmadipali14.hashnode.dev/understanding-objects-in-javascript">
+
+<img width = "500px" alt="Understanding Objects in JavaScript" src="assets/object.png">
+<p>
+</a>
+
+<br>
+
+[The Magic of this, call(), apply(), and bind() in JavaScript](https://sharmadipali14.hashnode.dev/the-magic-of-this-call-apply-and-bind-in-javascript)
+<a href="https://sharmadipali14.hashnode.dev/the-magic-of-this-call-apply-and-bind-in-javascript">
+
+<img width = "500px" alt="The Magic of this, call(), apply(), and bind() in JavaScript" src="assets/call-appy-bind.png">
+<p>
+</a>
+
+<br>
+
+[Understanding Object-Oriented Programming in JavaScript](https://sharmadipali14.hashnode.dev/understanding-object-oriented-programming-in-javascript)
+<a href="https://sharmadipali14.hashnode.dev/understanding-object-oriented-programming-in-javascript">
+
+<img width = "500px" alt="Understanding Object-Oriented Programming in JavaScript" src="assets/oop.png">
+<p>
+</a>
+
+<br>
