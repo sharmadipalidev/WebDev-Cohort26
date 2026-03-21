@@ -251,3 +251,12 @@
 </a>
 
 <br>
+
+[Deep dive into Node.JS Architecture](https://sharmadipali14.hashnode.dev/deep-dive-into-node-js-architecture)
+<a href="https://sharmadipali14.hashnode.dev/deep-dive-into-node-js-architecture">
+
+<img width = "500px" alt="Deep dive into Node.JS Architecture" src="assets/nodejs-architecture.png">
+<p>
+</a>
+
+<br>
