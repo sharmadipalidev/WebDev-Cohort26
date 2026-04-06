@@ -1,166 +1,33 @@
-title Instagram Thrift Creator Store DB diagram
-colorMode pastel
-notation crows-foot
-styleMode watercolor
-typeface clean
+1. Customers & Address Management
+Tables
 
-//product,customers,orders,order_items,payment_details,shipping_details,address_details,size,color,product_type,thrift,handmade
+Customers – Stores user account details.
+Address_details – Stores multiple customer addresses.
+Address_Type – Marks address as Home / Work / Other.
+2. Product Management
+Tables
 
-Customers [icon:azure-my-customers, color: Orange]{
-  customer_id char(36) serial pk
-  name varchar(50) unique not null 
-  email varchar(322) unique not null
-  phone varchar(20)
-  password varchar(256)
-  address text
-  created_at timestamp
-  updated_at timestamp
-}
+Product – Base product information.
+Product_Type – Identifies if product is Thrifted or Handmade.
+Product_Colors – Color.
+Product_Size – Size.
+Thrifted_Product_Category – Thrift product attributes.
+Handmade_Product_Category – Handmade product attributes.
+3. Orders System
+Tables
 
-Customers.customer_id < Orders.order_id
+Orders – Main order details & status.
+Order_Items – Products inside an order.
+4. Shipping Management
+Table
 
-Orders[icon:orders, color: Green]{
-order_id  char(36) pk
-customer_id  char(36) fk
-total_amount decimal(19,4) 
-order_status varchar(20) ENUM['pending', 'placed', 'shipping', 'delivered', 'processing', 'cancelled']
-created_at timestamp
-updated_at timestamp
-}
+Shipping_details
+Tracks shipping status
+Stores tracking number & delivery estimate
+5. Payments
+Table
 
- Orders.order_id < Order_Items.order_items_id
- Orders.order_id - Address_details.id
- 
-Order_Items[color: Red] {
-order_items_id char(36) pk
-order_id  char(36) fk
-product_id char(36) fk
-product_name varchar(255)
-price decimal(19,4)
-quantity int
-created_at timestamp
-updated_at timestamp
-}
-
-Order_Items.order_items_id < Product.id
-
-Shipping_details[color: Blue] {
-shipping_id serial pk
-order_id char(36) fk
-shipping_status varchar(20)
-traking_number varchar(100)
-expected_delivery date
-created_at timestamp
-updated_at timestamp
-}
-
-Orders.order_id - Shipping_details.shipping_id
-Orders.order_id - Payment_details.payment_id
-
-Payment_details[color: Blue] {
- payment_id varchar(255) pk
- order_id  char(36) fk
- transaction_id varchar(255) unique not null
- amount decimal(19,4) 
- payment_method varchar(50) ENUM['credit_card', 'debit_card', 'COD', 'gift_card', 'UPI']
- status  varchar(20) ENUM['pending', 'authorized' 'completed' 'failed' 'refunded']
- gateway varchar(50) ENUM['stripe', 'razorpay', 'paypal']
-created_at timestamp
-updated_at timestamp
-}
-
-Address_details[icon:azure-ip-address-manager, color: Blue]{
-  id char(36) serial pk
-  customer_id char(36) fk
-  full_name varchar(100) 
-  country char(2)
-  state varchar(100)
-  city varchar(100)
-  pincode varchar(20)
-  area varchar(100)
-  landmark varchar(128)
-  phone varchar(20) 
-  created_at timestamp
-  updated_at timestamp
-}
-
-Address_details.id - Address_Type.id
-
-Address_Type[icon:azure-public-ip-addresses, color: Red]{
-id serial pk
-customer_id char(36) fk
-address_type char(20) ENUM['Home', 'Work', 'Other']
-created_at timestamp
-updated_at timestamp
-}
-
-Product[color: Green] {
-id char(36) serial pk
-name varchar(255)
-descreiption text
-price decimal(19,4)
-quantity int
-created_at timestamp
-updated_at timestamp
-}
-
-Product.id < Product_Type.id
-
-Product_Type[color: Yellow] {
-id char(36) serial pk
-thrifted varchar(50)
-handmade varchar(50)
-created_at timestamp
-updated_at timestamp
-}
-
-Product_Type.id - Thrifted_Product_Category.id
-
-Thrifted_Product_Category[color: Red] {
-id char(36) serial pk
-size_id  char(36) fk
-color_id char(36) fk
-name varchar(100)
-category char(36)
-price decimal(19, 4)
-stock int
-condition varchar(20)
-created_at timestamp
-updated_at timestamp
-}
-
-Thrifted_Product_Category.id < Product_Size.size_id
-Thrifted_Product_Category.id < Product_Colors.color_id
-
-Product_Type.id - Handmade_Product_Category.id
-Handmade_Product_Category[color: Red] {
-id char(36) serial pk
-size_id  char(36) fk
-color_id char(36) fk
-name varchar(100) 
-category char(36)
-price decimal(19,4)
-stock int
-condition varchar(20)
-created_at timestamp
-updated_at timestamp
-}
-
-Handmade_Product_Category.id < Product_Size.size_id
-Handmade_Product_Category.id < Product_Colors.color_id
-
-Product_Size[color: Purple] {
-size_id serial pk
-size_label varchar(20) ENUM['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL']
-size_group varchar(50) ENUM['EU Footwear', 'US Alpha', 'Inches']
-created_at timestamp
-updated_at timestamp
-}
-
-Product_Colors[color: Purple] {
-color_id serial pk
-color_name
-created_at timestamp
-  updated_at timestamp
-}
-
+Payment_details
+Supports UPI, Card, COD, Gift Card
+Tracks gateway (Stripe / Razorpay / PayPal)
+Stores transaction status
