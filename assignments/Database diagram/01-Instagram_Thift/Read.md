@@ -11,7 +11,7 @@ This is not just a “shop” problem. You should think carefully about how thri
 
 ### ER Diagram:
 
-![ER Diagram](./DB_Design.png)
+![ER Diagram](./instagramDB.png)
 
 ### 1. Customers & Address Management
 
