@@ -1,0 +1,93 @@
+title Comic-Con Parking System
+Users[color: Red] {
+user_id serial pk 
+full_name varchar(100)
+email varchar(322)
+phone_number varchar(15)
+}
+Vehicles[color: Blue] {
+  vehicle_id serial pk
+  name varchar 
+  user_id  int fk
+  license_plate_number varchar unique
+  vehicle_category_id int fk
+  color varchar
+  created_at timestamp
+  updated_at timestamp
+}
+Vehicle_categories[color: Green] {
+vehicle_category_id serial pk
+category_name enum('bikes', 'cars', 'SUVs', 'cabs','EV vehicles')
+created_at timestamp
+updated_at timestamp
+}
+parking_zones_level[color: Blue] {
+  zone_level_id serial pk
+  zone_name enum('A','B','C')
+  level_number init
+  security_level varchar
+  created_at timestamp
+  updated_at timestamp
+}
+parking_spots[color: Orange] {
+  spot_id serial pk not null
+  spot_number int 
+  zone_level_id fk
+  spot_categories_id fk
+  is_functional boolean 
+  is_available boolean 
+  created_at timestamp
+ updated_at timestamp
+}
+parking_spot_categories[color: Red] {
+ spot_categories_id serial pk
+  category_name enum('bikes', 'cars', 'SUVs', 'cabs','EV vehicles')
+  price_per_hour int 
+  created_at timestamp
+  updated_at timestamp
+}
+Parking_Session[color: Yellow] {
+  session_id serial pk unique not null
+  vehicle_id int fk
+  spot_id fk
+  start_time timestamp
+  end_time timestamp
+  session_status enum('active','completed','overdue')
+  created_at timestamp
+  updated_at timestamp
+}
+
+parking_tickets[color: Green] {
+  ticket_id serial pk not null
+  session_id  fk unique not null
+  ticket_number int unique
+  issue_date datetime not null
+created_at timestamp
+updated_at timestamp
+}
+
+Payment[color: Purple] {
+payment_id serial pk
+session_id int fk
+amount decimal(10,2)
+payment_status enum('Pending','Paid','Failed')
+payment_method enum('card','UPI','cash')
+created_at timestamp
+updated_at timestamp
+}
+
+Users.user_id < Vehicles.user_id
+
+Vehicles.vehicle_category_id > Vehicle_categories.vehicle_category_id
+
+parking_spots.zone_level_id > parking_zones_level.zone_level_id
+
+parking_spots.spot_categories_id > parking_spot_categories.spot_categories_id
+
+Parking_Session.vehicle_id > Vehicles.vehicle_id
+
+Parking_Session.spot_id > parking_spots.spot_id
+
+parking_tickets.session_id - Parking_Session.session_id
+
+Parking_Session.session_id < Payment.session_id
