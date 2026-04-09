@@ -1,133 +1,94 @@
-User[color: Red] {
-  user_id seriel pk
-  first_name varchar(50) not null
-  last_name varchar(50) not null
-  email varchar unique not null
-  phone varchar(15)
-  password varchar
-  user_role enum['trainer', 'client','admin']
+title Comic-Con Parking System
+Users[color: Red] {
+user_id serial pk 
+full_name varchar(100)
+email varchar(322)
+phone_number varchar(15)
+password_hash varchar
+}
+Vehicles[color: Blue] {
+  vehicle_id serial pk
+  name varchar 
+  user_id  int fk
+  license_plate_number varchar unique
+  vehicle_category_id int fk
+  color varchar
   created_at timestamp
   updated_at timestamp
-  }
-
-  Trainers[color: Blue] {
-  trainer_id seriel pk
-  user_id fk unique
-  experience int
-  specialties varchar
-  max_client int
-  certification text
-  is_available boolean
+}
+Vehicle_categories[color: Green] {
+vehicle_category_id serial pk
+category_name enum('bikes', 'cars', 'SUVs', 'cabs','EV vehicles')
+created_at timestamp
+updated_at timestamp
+}
+parking_zones_level[color: Blue] {
+  zone_level_id serial pk
+  zone_name enum('A','B','C')
+  level_number init
+  security_level varchar
   created_at timestamp
   updated_at timestamp
-  }
-
-  Clients[color: Blue] {
-  client_id seriel pk
-  user_id fk unique
-  trainer_id fk 
-  date_of_birth date
-  gender emun['male','female','other']
-  height decimal
-  weight decimal
-  medical_conditions text
+}
+parking_spots[color: Orange] {
+  spot_id serial pk not null
+  spot_number int 
+  zone_level_id fk
+  spot_categories_id fk
+  is_functional boolean 
+  is_reserved boolean 
+  created_at timestamp
+ updated_at timestamp
+}
+parking_spot_categories[color: Red] {
+ spot_categories_id serial pk
+  category_name enum('bikes', 'cars', 'SUVs', 'cabs','EV vehicles')
+  price_per_hour int 
   created_at timestamp
   updated_at timestamp
-  }
-
-  Plans[color: Purple] {
-  plan_id seriel pk
-  trainer_id fk
-  plan_name varchar
-  duration_week int
-  price decimal
-  description varchar 
-  include_diet varchar
-  include_workout varchar
-  created_at timestamp
-  updated_at timestamp
-  }
-  
-  Subscriptions [color: Yellow] {
-  subscription_id seriel pk
-  client_id fk
-  plan_id fk
-  status enum['active', 'expired', 'cancelled'] not null
-  current_plan_start datetime not null
-  current_plan_end datetime not null
-  is_active boolean
-  created_at timestamp
-  updated_at timestamp
-  }
-
-  Payment[color: Purple] {
-    payment_id seriel pk
-    suscription_id fk
-    amount decimal(10,2) not null
-    payment_method enum['card','upi','cash','netbanking']
-    payment_status enum['succeeded', 'failed', 'refunded'] 
-    payment_gateway_ref varchar
-    created_at timestamp
-    updated_at timestamp
-  }
-
-  Sessions [color: Green] {
-  session_id seriel pk
-  trainer_id fk
-  client_id fk
-  session_date datetime NOT NULL
-  durations int
-  created_at timestamp
-  updated_at timestamp
-  }
-
-CheckIn[color: Purple] {
-  checkIn_id seriel pk
-  client_id int fk
-  session_id fk
-  checkIn_date datetime
-  workout_type enum['Strength', 'Cardio', 'Yoga']
-  avg_heart_rate int
-  calories_burned int
+}
+Parking_Session[color: Yellow] {
+  session_id serial pk unique not null
+  vehicle_id int fk
+  spot_id fk
+  start_time timestamp
+  end_time timestamp
+  session_status enum('active','completed','overdue')
   created_at timestamp
   updated_at timestamp
 }
 
-  Progress_tracking[color: Green] {
-  progress_id seriel PK
-  client_id FK
-  weight decimal
-  body_fat decimal
-  muscle_mass decimal
-  notes text
-  weekly_checkIn boolean
-  created_at timestamp
-  updated_at timestamp
-  }
+parking_tickets[color: Green] {
+  ticket_id serial pk not null
+  session_id  fk unique not null
+  ticket_number int unique
+  issue_date datetime not null
+created_at timestamp
+updated_at timestamp
+}
 
-User.user_id  > Trainers.user_id
+Payment[color: Purple] {
+payment_id serial pk
+session_id int fk
+total_amount decimal(10,2)
+payment_status enum('Pending','Paid','Failed')
+payment_method enum('card','UPI','cash')
+created_at timestamp
+updated_at timestamp
+}
 
-User.user_id  > Clients.user_id
+Users.user_id < Vehicles.user_id
 
-Trainers.trainer_id  > Clients.trainer_id
+Vehicles.vehicle_category_id > Vehicle_categories.vehicle_category_id
 
-Trainers.trainer_id  > Plans.trainer_id
+parking_spots.zone_level_id > parking_zones_level.zone_level_id
 
-Trainers.trainer_id  > Sessions.trainer_id
+parking_spots.spot_categories_id > parking_spot_categories.spot_categories_id
 
-Clients.client_id > Sessions.client_id
+Parking_Session.vehicle_id > Vehicles.vehicle_id
 
-Clients.client_id  > Subscriptions.client_id
+Parking_Session.spot_id > parking_spots.spot_id
 
-Clients.client_id > CheckIn.client_id
+parking_tickets.session_id - Parking_Session.session_id
 
-Clients.client_id  > Progress_tracking.client_id
-
-Plans.plan_id  > Subscriptions.plan_id
-
-Subscriptions.subscription_id >Payment.suscription_id
-
-
-
-
-  
+Parking_Session.session_id < Payment.session_id
