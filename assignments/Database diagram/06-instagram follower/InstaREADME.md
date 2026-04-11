@@ -8,6 +8,10 @@ The database is designed to support core Instagram features including user profi
 
 ## Tables
 
+## Database Diagram
+
+![Instagram Database Diagram](InstagramFollowDB.png)
+
 ### Users
 
 Stores user account information and authentication details.
@@ -113,15 +117,6 @@ Manages follower/following relationships between users.
 - **Posts** has many **Comments** (one-to-many)
 - **Posts** has many **Likes** (one-to-many)
 
-## Database Diagram
 
-![Instagram Database Diagram](InstagramFollowDB.png)
 
-## Notes
 
-- All foreign keys reference the `id` field of their respective parent tables
-- Timestamps use standard SQL timestamp format
-- Passwords should be hashed using a secure algorithm (e.g., bcrypt)
-- The Followers table appears to be incomplete in the schema - it may need additional fields like `follower_id` to properly represent follower relationships
-- URLs are stored as text fields, assuming external storage (e.g., cloud storage)
-- The schema supports Instagram's core features but may need extensions for advanced features like direct messages, hashtags, or location tagging
