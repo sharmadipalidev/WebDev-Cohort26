@@ -24,4 +24,4 @@
 
 #### Mintlify Landing page made with HTML and CSS. [Visit here](https://mintlify-clone-nu.vercel.app/)
 
-#### GitHub JS Classroom assignments
+#### GitHub JS Classroom assignments. 
