@@ -1,0 +1,113 @@
+title Clinic Appointment and Diagnostics Platform
+Clinic[color: Red] {
+clinic_id serial pk
+name varchar 
+address text
+tel_phone int
+doctor_id fk
+patient_id fk
+created_at timestamp
+updated_at timestamp
+}
+Doctors[color: Blue] {
+doctor_id serial pk
+full_name varchar(100)
+contact_number varchar(15)
+licence_number int
+experience int 
+speciality varchar
+created_at timestamp
+updated_at timestamp
+}
+
+Patients[color: Green] {
+patient_id serial pk
+first_name varchar(50) not null
+last_name varchar(50) not null
+phone_number varchar(15) not null
+date_of_birth date
+gender enum('male',female','other')
+medical_history varchar
+Blood_Type varchar
+address text 
+created_at timestamp
+updated_at timestamp
+}
+Appointments[color: Purple] {
+appointment_id serial pk
+patient_id int fk
+doctor_id int fk
+appointment_date date
+appointment_time time
+appointment_status enum('completed','canceled','sheduled')
+reason_for_visit text
+created_at timestamp
+updated_at timestamp
+}
+Consultations[color: Yellow] {
+consultation_id serial pk
+appointment_id fk
+patient_id fk
+doctor_id fk
+symptoms text
+diagnosis text
+prescription text
+consultation_fee
+created_at timestamp
+updated_at timestamp
+}
+Diagnostic_Tests[color: Green] {
+test_id serial pk
+test_type varchar
+diagnosis_result varchar
+prescription text
+created_at timestamp
+updated_at timestamp
+}
+Reports[color: Orange] {
+report_id serial pk
+patient_id fk
+doctor_id fk
+consultation_id fk
+report_type 
+created_at timestamp
+updated_at timestamp
+}
+
+Payments[color: Red] {
+payment_id serial pk
+patient_id int fk
+consultation_id
+total_amount
+payment_method enum('card','cash',upi',')
+payment_status enum('pending','paid','failed','refunded') default: 'pending
+created_at timestamp
+updated_at timestamp
+}
+
+Clinic.doctor_id  < Doctors.doctor_id
+Clinic.patient_id < Patients.patient_id
+
+Doctors.doctor_id < Appointments.doctor_id: [color: purple]
+Doctors.doctor_id < Consultations.doctor_id: [color: yellow]
+Doctors.doctor_id  < Reports.doctor_id: [color: orange]
+
+
+Patients.patient_id  < Consultations.patient_id: [color: yellow]
+Patients.patient_id < Appointments.patient_id: [color: purple]
+
+
+Appointments.appointment_id  - Consultations.appointment_id: [color: purple]
+
+Consultations.consultation_id   - Payments.consultation_id
+: [color: "#b13d3d"]
+Consultations.consultation_id < Diagnostic_Tests.test_id: [color: green]
+
+
+
+
+
+
+
+
+ 

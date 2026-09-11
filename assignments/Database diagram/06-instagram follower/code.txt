@@ -1,0 +1,93 @@
+title Instagram DB Diagram
+Users[icon:user, color: Purple]{
+  id serial pk
+  username varchar(50) unique not null
+  emial varchar(100) unique not null
+  phone char(15)
+  dob date
+  password varchar(256)
+  bio text
+  forgot_password_token text
+  email_verification_token text
+  created_at timestamp
+  updated_at timestamp
+}
+Posts[icon:notebook, color: Red]{
+  id serial pk
+  caption text
+  image_url text null
+  video_url text null
+  reel_url text null
+  auther_id int fk
+  created_at timestamp
+  updated_at timestamp
+}
+Stories[icon:notebook, color: Blue]{
+  id serial pk
+  image_url text null
+  video_url text null
+  post_id int fk null
+  auther_id int fk
+  created_at timestamp
+  updated_at timestamp
+}
+Bookmarks[icon:bookmark, color: Yellow]{
+  is serial pk
+  post_id int fk
+  auther_id int fk
+  created_at timestamp
+  updated_at timestamp
+}
+
+Account_Setting[icon:settings, color: Green]{
+  is serial pk
+  user_id int fk
+  is_account_private boolean
+  created_at timestamp
+  updated_at timestamp
+}
+
+Comments[icon:message-circle, color: Green]{
+  id serial pk
+  auther_id int fk
+  post_id int fk
+  content text 
+  created_at timestamp
+  updated_at timestamp
+}
+Likes[icon:heart, color: Red]{
+  is serial pk
+  auther_id int fk
+  post_id int fk
+  created_at timestamp
+  updated_at timestamp
+}
+Followers [icon:azure-connections, color: Orange]{
+  id serial pk
+  user_id int fk
+  created_at timestamp
+  updated_at timestamp
+
+}
+
+Users.id - Account_Setting.id
+Users.id < Bookmarks.auther_id
+Users.id  < Stories.auther_id
+Users.id < Posts.auther_id
+
+Stories.post_id - Posts.id
+Bookmarks.post_id -Posts.id
+Comments.auther_id > Users.id
+Comments.post_id  >Posts.id
+Likes.auther_id  > Users.id
+Likes.post_id >Posts.id
+
+Users.id <> Followers.id
+
+
+
+
+
+
+
+

@@ -1,0 +1,85 @@
+title Indian Premier League
+Teams[icon:teams, color: Blue]{
+  team_id serial pk unique not null
+  name varchar(50) not null
+  city varchar(50)
+  owener_id int
+  home_ground varchar
+  logo_url varchar
+  created_at timestamp
+  updated_at timestamp
+}
+Players[icon:person, color: Purple]{
+  player_id serial pk unique not null
+  team_id int fk not null
+  player_name varchar(50) not null
+  nickname varchar(50)
+  country varchar(50)
+  date_of_birth date
+  auction_price decimal(10,4)
+  salary int 
+  role enum('batsman',bowler','all rounder')
+  created_at timestamp
+  updated_at timestamp
+}
+Owners[icon:battery, color: Green]{
+  owner_id serial pk not null
+  team_id int fk not null
+  name varchar(50)
+  net_worth int
+  created_at timestamp
+  updated_at timestamp
+}
+Sponsors[icon:flag, color: Yellow]{
+  sponsor_id serial pk not null
+  team_id int fk not null
+  sponcer_brand_name carchar(50)
+  price decimal(18,4)
+  industry varchar(50)
+  created_at timestamp
+  updated_at timestamp
+}
+Matches[icon:road, color: Orange]{
+  match_id serial pk not null
+  team_id int fk
+  player_id int fk 
+  created_at timestamp
+  updated_at timestamp
+}
+Stadiums[icon:landmark, color: Purple]{
+  stadium_id serial pk
+  stadium_name varchar(50)
+  city varchar(50)
+  capacity int
+  created_at timestamp
+  updated_at timestamp
+}
+Broadcasters[icon:tv, color: Red]{
+  broadcaster_id serial pk not null
+  channel_name varchar(50)
+  platform enum('cable','DTH',online')
+  language enum('english','hindi','tamil','teluga','kannada','bangla','malayalam')
+  start_date datetime
+  end_date datetime
+  viewership_count bigint
+  created_at timestamp
+  updated_at timestamp
+}
+
+Teams.team_id < Players.team_id
+
+Teams.owener_id < Owners.owener_id
+
+Teams.team_id < Sponsors.team_id
+
+Teams.team_id < Matches.team_id
+
+Players.player_id < Matches.player_id
+
+
+Stadiums.stadium_id < Matches.stadium_id
+
+Broadcasters.broadcaster_id <> Matches.match_id
+
+
+
