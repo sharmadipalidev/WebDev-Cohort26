@@ -54,10 +54,24 @@
  */
 export function createThaliDescription(thali) {
   // Your code here
+  if (
+    typeof thali !== "object" ||
+    thali === null ||
+    typeof name !== "string" ||
+    (typeof price !== "number") | !Array.isArray(thali.items) ||
+    typeof isVeg !== "boolean"
+  )
+    return "";
+
+  return `${name.upperCase()}(${isVeg ? "Veg" : "Non-Veg"})-Items : ${items.join} -Rs.${price}`;
 }
 
 export function getThaliStats(thalis) {
   // Your code here
+  if (!Array.isArray(thalis) || thalis.length === "") return null;
+
+
+ 
 }
 
 export function searchThaliMenu(thalis, query) {
