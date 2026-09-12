@@ -54,24 +54,31 @@
  */
 export function createThaliDescription(thali) {
   // Your code here
-  if (
-    typeof thali !== "object" ||
-    thali === null ||
-    typeof name !== "string" ||
-    (typeof price !== "number") | !Array.isArray(thali.items) ||
-    typeof isVeg !== "boolean"
-  )
+  if (typeof thali !== "object" || thali === null) {
     return "";
+  }
 
-  return `${name.upperCase()}(${isVeg ? "Veg" : "Non-Veg"})-Items : ${items.join} -Rs.${price}`;
+  if (
+    typeof thali.name !== "string" ||
+    !Array.isArray(thali.items) ||
+    typeof thali.price !== "number" ||
+    typeof thali.isVeg !== "boolean"
+  ) {
+    return "";
+  }
+
+  const name = thali.name.toUpperCase();
+  const items = thali.items.join(", ");
+  const type = thali.isVeg ? "Veg" : "Nn-Veg";
+  const price = thali.price.toFixed(2);
+
+  return `${name} (${type}) - Items: ${items} - Rs.${price}`;
 }
 
 export function getThaliStats(thalis) {
   // Your code here
   if (!Array.isArray(thalis) || thalis.length === "") return null;
-
-
- 
+  
 }
 
 export function searchThaliMenu(thalis, query) {
