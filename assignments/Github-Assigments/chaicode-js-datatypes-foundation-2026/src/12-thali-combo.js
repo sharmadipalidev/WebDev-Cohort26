@@ -124,12 +124,30 @@ export function searchThaliMenu(thalis, query) {
 
 export function generateThaliReceipt(customerName, thalis) {
   // Your code here
+
   if (
     typeof customerName !== "string" ||
     !Array.isArray(thalis) ||
     thalis.length === 0
-  )
+  ) {
     return "";
-  
-  
+  }
+
+  const lineItems = thalis
+    .map((thali) => `- ${thali.name} x Rs.${thali.price}`)
+    .join("\n");
+
+  const total = thalis.reduce((sum, thali) => {
+    return sum + thali.price;
+  }, 0);
+
+  const count = thalis.length;
+
+  return `THALI RECEIPT
+---
+Customer: ${customerName.toUpperCase()}
+${lineItems}
+---
+Total: Rs.${total}
+Items: ${count}`;
 }
