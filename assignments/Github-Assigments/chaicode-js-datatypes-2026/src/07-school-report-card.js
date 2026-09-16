@@ -42,4 +42,13 @@
  */
 export function generateReportCard(student) {
   // Your code here
+  if (typeof student !== "object" || student === null) return null;
+  if (typeof student.name !== "string" || student.name === "") return null;
+  if (
+    typeof student.marks !== "number" ||
+    !Number.isFinite(student.marks || marks < 1 || marks > 100)
+  )
+    return null;
+  
+  
 }
