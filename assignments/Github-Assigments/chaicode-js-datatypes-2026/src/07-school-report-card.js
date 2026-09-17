@@ -43,12 +43,80 @@
 export function generateReportCard(student) {
   // Your code here
   if (typeof student !== "object" || student === null) return null;
-  if (typeof student.name !== "string" || student.name === "") return null;
+
+  if (typeof student.name !== "string" || student.name.trim() === "")
+    return null;
+
   if (
-    typeof student.marks !== "number" ||
-    !Number.isFinite(student.marks || marks < 1 || marks > 100)
+    typeof student.marks !== "object" ||
+    student.marks === null ||
+    Object.keys(student.marks).length === 0
   )
     return null;
-  
-  
+  const subjects = Object.keys(student.marks);
+  const marks = Object.values(student.marks);
+
+  if (
+    marks.some(
+      (mark) =>
+        typeof mark !== "number" ||
+        !Number.isFinite(mark) ||
+        mark < 0 ||
+        mark > 100,
+    )
+  )
+    return null;
+
+  const totalMarks = marks.reduce((sum, mark) => sum + mark, 0);
+
+  const subjectCount = subjects.length;
+
+  const percentage = parseFloat(
+    ((totalMarks / (subjectCount * 100)) * 100).toFixed(2),
+  );
+
+  let grade;
+
+  if (percentage >= 90) {
+    grade = "A+";
+  } else if (percentage >= 80) {
+    grade = "A";
+  } else if (percentage >= 70) {
+    grade = "B";
+  } else if (percentage >= 60) {
+    grade = "C";
+  } else if (percentage >= 40) {
+    grade = "D";
+  } else {
+    grade = "F";
+  }
+
+  const entries = Object.entries(student.marks);
+
+  const highestSubject = entries.find(
+    ([subject, mark]) => mark === Math.max(...marks),
+  )[0];
+
+  const lowestSubject = entries.find(
+    ([subject, mark]) => mark === Math.min(...marks),
+  )[0];
+
+  const passedSubjects = entries
+    .filter(([subject, mark]) => mark >= 40)
+    .map(([subject]) => subject);
+
+  const failedSubjects = entries
+    .filter(([subject, mark]) => mark < 40)
+    .map(([subject]) => subject);
+  return {
+    name: student.name,
+    totalMarks,
+    percentage,
+    grade,
+    highestSubject,
+    lowestSubject,
+    passedSubjects,
+    failedSubjects,
+    subjectCount,
+  };
 }
