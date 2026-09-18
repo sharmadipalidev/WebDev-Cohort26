@@ -72,9 +72,13 @@
  */
 export function processRailwayPNR(pnrData) {
   if (!pnrData || typeof pnrData !== 'object') return null;
+
   if (typeof pnrData.pnr !== 'string') return null;
+
   if (pnrData.pnr.length !== 10 || !/^\d{10}$/.test(pnrData.pnr)) return null;
+
   if (!pnrData.train || typeof pnrData.train !== 'object') return null;
+  
   if (!Array.isArray(pnrData.passengers) || pnrData.passengers.length === 0) return null;
 
   const pnrFormatted = pnrData.pnr.slice(0, 3) + "-"
