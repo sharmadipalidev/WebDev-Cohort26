@@ -50,5 +50,79 @@ export function analyzeUPITransactions(transactions) {
   // Your code here
   if (!Array.isArray(transactions) || transactions.length === 0) return null;
 
-  
+  const validTransaction = transactions.filter(
+    (transaction) =>
+      typeof transaction.amount === "number" &&
+      transaction.amount > 0 &&
+      (transaction.type === "credit" || transaction.type === "debit"),
+  );
+
+  if (validTransaction.length === 0) return null;
+
+  const totalCredit = validTransaction.reduce(
+    (sum, transaction) =>
+      transaction.type === "credit" ? sum + transaction.amount : sum,
+    0,
+  );
+
+  const totalDebit = validTransaction.reduce(
+    (sum, transaction) =>
+      transaction.type === "debit" ? sum + transaction.amount : sum,
+    0,
+  );
+
+  const netBalance = totalCredit - totalDebit;
+
+  const transactionCount = validTransaction.length;
+
+  const totalAmount = validTransaction.reduce(
+    (sum, transaction) => sum + transaction.amount,
+    0,
+  );
+  const avgTransaction = Math.round(totalAmount / transactionCount);
+
+  const highestTransaction = validTransaction.reduce((highest, transaction) =>
+    transaction.amount > highest.amount ? transaction : highest,
+  );
+
+  const categoryBreakdown = validTransaction.reduce((result, transaction) => {
+    result[transaction.category] =
+      (result[transaction.category] || 0) + transaction.amount;
+    {
+      return result;
+    }
+  }, {});
+
+  const contactCounts = validTransaction.reduce((result, transaction) => {
+    result[transaction.to] = (result[transaction.to] || 0) + 1;
+    return result;
+  }, {});
+
+  const frequentContact = Object.keys(contactCounts).reduce(
+    (mostFrequent, contact) =>
+      contactCounts[contact] > contactCounts[mostFrequent]
+        ? contact
+        : mostFrequent,
+  );
+
+  const allAbove100 = validTransaction.every(
+    (transaction) => transaction.amount > 100,
+  );
+
+  const hasLargeTransaction = validTransaction.some(
+    (transaction) => transaction.amount >= 5000,
+  );
+
+  return {
+    totalCredit,
+    totalDebit,
+    netBalance,
+    transactionCount,
+    avgTransaction,
+    categoryBreakdown,
+    highestTransaction,
+    frequentContact,
+    allAbove100,
+    hasLargeTransaction,
+  };
 }
