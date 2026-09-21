@@ -38,4 +38,7 @@
  */
 export function iplPointsTable(matches) {
   // Your code here
+  if (!Array.isArray(matches) || matches.lenth === 0) {
+    return [];
+  }
 }
