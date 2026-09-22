@@ -42,11 +42,14 @@
  *   // => { months: -1, totalPaid: -1, totalInterest: -1 }
  */
 export function calculateEMI(principal, monthlyRate, emi) {
-  // Validation
+  
   if (
     typeof principal !== "number" ||
     typeof monthlyRate !== "number" ||
     typeof emi !== "number" ||
+    !Number.isFinite(principal) ||
+    !Number.isFinite(monthlyRate) ||
+    !Number.isFinite(emi) ||
     principal <= 0 ||
     monthlyRate <= 0 ||
     emi <= 0
@@ -58,7 +61,6 @@ export function calculateEMI(principal, monthlyRate, emi) {
     };
   }
 
-  // Infinite loop protection
   const firstMonthInterest = principal * monthlyRate;
 
   if (emi <= firstMonthInterest) {
@@ -69,31 +71,32 @@ export function calculateEMI(principal, monthlyRate, emi) {
     };
   }
 
-  let totalPaid = 0;
   let remaining = principal;
   let months = 0;
+  let totalPaid = 0;
   let totalInterest = 0;
 
   while (remaining > 0) {
     const interest = remaining * monthlyRate;
 
-    remaining = remaining + interest;
-
+    remaining += interest;
     totalInterest += interest;
 
-    // Last month mein sirf remaining amount pay hoga
-    const payment = remaining < emi ? remaining : emi;
+    let payment = emi;
 
-    remaining = remaining - payment;
+   
+    if (remaining < emi) {
+      payment = remaining;
+    }
 
-    months++;
-
+    remaining -= payment;
     totalPaid += payment;
+    months++;
   }
 
   return {
     months,
-    totalPaid,
-    totalInterest,
+    totalPaid: Number(totalPaid.toFixed(2)),
+    totalInterest: Number(totalInterest.toFixed(2)),
   };
 }
