@@ -48,14 +48,14 @@ export function biryaniBatchProcessor(orders) {
   let ordersProcessed = 0;
 
   for (let order of orders) {
-    // Invalid order ko skip karo
+   
     if (!Number.isInteger(order) || order <= 0) {
       continue;
     }
 
     let remainingPlates = order;
 
-    // Har order ke liye do...while
+ 
     do {
       let batchSize = Math.min(remainingPlates, 5);
 
