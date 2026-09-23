@@ -32,22 +32,26 @@
  *   calculateAutoFare(-2)   // => -1
  */
 export function calculateAutoFare(distance, waitingMinutes = 0) {
-  // Your code here
+  // 1. Validation: distance must be a positive number, waitingMinutes cannot be negative
   if (
-    !Number.isInteger(distance) ||
+    typeof distance !== "number" ||
+    isNaN(distance) ||
     distance <= 0 ||
-    waitingMinutes < 0 ||
-    !Number.isInteger(waitingMinutes)
-  )
+    typeof waitingMinutes !== "number" ||
+    isNaN(waitingMinutes) ||
+    waitingMinutes < 0
+  ) {
     return -1;
+  }
 
-  distance = Math.ceil(distance);
-
+  // 2. Round up distance and waiting minutes
+  const totalKm = Math.ceil(distance);
   let fare = 0;
   let km = 1;
 
-  while (km <= distance) {
-    if (km == 1) {
+  // 3. Calculate distance fare km by km using while loop
+  while (km <= totalKm) {
+    if (km === 1) {
       fare += 30;
     } else if (km <= 5) {
       fare += 15;
@@ -55,10 +59,11 @@ export function calculateAutoFare(distance, waitingMinutes = 0) {
       fare += 10;
     }
     km++;
-
-    let waitingPairs = Math.ceil(waitingMinutes / 2);
-    fare += waitingPairs * 5;
-
-    return fare;
   }
+
+  // 4. Calculate waiting fare (Rs 5 per 2-minute block, rounded up)
+  const waitingPairs = Math.ceil(waitingMinutes / 2);
+  fare += waitingPairs * 5;
+
+  return fare;
 }
