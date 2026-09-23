@@ -37,4 +37,9 @@
  */
 export function rangoli(n) {
   // Your code here
+  if (!Number.isInteger(n) || n <= 0) {
+    return [];
+  }
+
+  
 }
