@@ -70,12 +70,28 @@ export const isAllRounder = (battingAvg, economy) => {
   return battingAvg > 30 && economy < 8;
 };
 
-export const getPlayerCard = (player) => {
-  // Your code here
-  if (
-    typeof player === "null" ||
-    typeof player === "undefined" ||
-    player.name === ""
-  )
+export function getPlayerCard(player) {
+  if (!player || !player.name) {
     return null;
-};
+  }
+
+  const strikeRate = calcStrikeRate(player.runs, player.balls);
+
+  const economy = calcEconomy(player.runsConceded, player.overs);
+
+  const battingAvg = calcBattingAvg(
+    player.totalRuns,
+    player.innings,
+    player.notOuts,
+  );
+
+  const allRounder = isAllRounder(battingAvg, economy);
+
+  return {
+    name: player.name,
+    strikeRate,
+    economy,
+    battingAvg,
+    isAllRounder: allRounder,
+  };
+}
