@@ -55,20 +55,52 @@
  */
 export function mixColors(color1, color2) {
   // Your code here
+  if (!color1 || !color2) return null;
+
+  return {
+    name: `${color1.name}-${color2.name}`,
+    r: Math.round((color1.r + color2.r) / 2),
+    g: Math.round((color1.g + color2.g) / 2),
+    b: Math.round((color1.b + color2.b) / 2),
+  };
 }
 
 export function adjustBrightness(color, factor) {
-  // Your code here
+  if (!color || typeof factor !== "number") {
+    return null;
+  }
+
+  return {
+    ...color,
+    r: Math.min(255, Math.max(0, Math.round(color.r * factor))),
+    g: Math.min(255, Math.max(0, Math.round(color.g * factor))),
+    b: Math.min(255, Math.max(0, Math.round(color.b * factor))),
+  };
 }
 
 export function addToPalette(palette, color) {
   // Your code here
+  if (!Array.isArray(palette)) return [color];
+  if (!color) return [...palette];
+
+  return [...palette, color];
 }
 
 export function removeFromPalette(palette, colorName) {
   // Your code here
+  if (!Array.isArray(palette)) return [];
+
+  return palette.filter((color) => color.name !== colorName);
 }
 
 export function mergePalettes(palette1, palette2) {
-  // Your code here
+  const first = Array.isArray(palette1) ? palette1 : [];
+  const second = Array.isArray(palette2) ? palette2 : [];
+
+  const merged = [...first, ...second];
+
+  return merged.filter(
+    (color, index, array) =>
+      array.findIndex((item) => item.name === color.name) === index,
+  );
 }
