@@ -64,7 +64,7 @@
  *   // => "voted!"
  */
 export function createElection(candidates) {
-  // Private state - closure
+  
   const votes = {};
   const registeredVoters = new Set();
   const votedVoters = new Set();
