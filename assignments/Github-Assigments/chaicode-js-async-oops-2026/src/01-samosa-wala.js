@@ -64,7 +64,7 @@
  *   cart.sellItem("samosa", 3);    // => 45
  *   cart.sellItem("jalebi", 2);    // => 40
  *   cart.getDailySales();           // => 85
- *   cart.getPopularItem();          // => "samosa"
+ *   cart.getPopularItem();          // => "samosa"w
  *   cart.moveTo("College Gate");    // => "Ramu ka cart ab College Gate pe hai!"
  *   cart.resetDay();                // => "Ramu ka naya din shuru!"
  *
@@ -75,6 +75,13 @@
  */
 export function createSamosaCart(ownerName, location) {
   // Your code here
+
+  return {
+    owner: ownerName,
+    location: location,
+    menu: { samosa: 15, jalebi: 20, kachori: 25 },
+    sales: [],
+  };
 }
 
 export function demonstrateThisLoss(cart) {
