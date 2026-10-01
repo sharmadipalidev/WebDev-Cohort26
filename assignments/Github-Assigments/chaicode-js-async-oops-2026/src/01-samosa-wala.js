@@ -73,21 +73,86 @@
  *   const lostFn = demonstrateThisLoss(cart); // unbound sellItem function
  *   const boundFn = fixWithBind(cart);         // properly bound sellItem
  */
-export function createSamosaCart(ownerName, location) {
-  // Your code here
 
+export function createSamosaCart(ownerName, location) {
   return {
     owner: ownerName,
     location: location,
-    menu: { samosa: 15, jalebi: 20, kachori: 25 },
+
+    menu: {
+      samosa: 15,
+      jalebi: 20,
+      kachori: 25,
+    },
+
     sales: [],
+
+    sellItem(itemName, quantity) {
+      if (
+        !this.menu[itemName] ||
+        typeof quantity !== "number" ||
+        quantity <= 0
+      ) {
+        return -1;
+      }
+
+      const price = this.menu[itemName];
+      const total = price * quantity;
+
+      this.sales.push({
+        item: itemName,
+        quantity: quantity,
+        total: total,
+      });
+
+      return total;
+    },
+
+    getDailySales() {
+      return this.sales.reduce((sum, sale) => sum + sale.total, 0);
+    },
+
+    getPopularItem() {
+      if (this.sales.length === 0) {
+        return null;
+      }
+
+      const quantities = {};
+
+      for (const sale of this.sales) {
+        quantities[sale.item] = (quantities[sale.item] || 0) + sale.quantity;
+      }
+
+      let popularItem = null;
+      let maxQuantity = 0;
+
+      for (const item in quantities) {
+        if (quantities[item] > maxQuantity) {
+          maxQuantity = quantities[item];
+          popularItem = item;
+        }
+      }
+
+      return popularItem;
+    },
+
+    moveTo(newLocation) {
+      this.location = newLocation;
+      return `${this.owner} ka cart ab ${newLocation} pe hai!`;
+    },
+
+    resetDay() {
+      this.sales = [];
+      return `${this.owner} ka naya din shuru!`;
+    },
   };
 }
 
 export function demonstrateThisLoss(cart) {
-  // Your code here
+  const sellItem = cart.sellItem;
+  return sellItem;
 }
 
 export function fixWithBind(cart) {
-  // Your code here
+  return cart.sellItem.bind(cart);
 }
