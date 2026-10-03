@@ -129,7 +129,6 @@
  */
 export class Player {
   constructor(name, age, team) {
-    // Your code here
     this.name = name;
     this.age = age;
     this.team = team;
@@ -137,7 +136,6 @@ export class Player {
   }
 
   getProfile() {
-    // Your code here
     return {
       name: this.name,
       age: this.age,
@@ -148,31 +146,31 @@ export class Player {
   }
 
   train(hours) {
-    // Your code here
-    if (hours <= 0) return -1;
+    if (hours <= 0) {
+      return -1;
+    }
 
     this.trainingHours += hours;
-
     return this.trainingHours;
   }
 
   getTrainingHours() {
-    // Your code here
     return this.trainingHours;
   }
 }
 
 export class Batsman extends Player {
   constructor(name, age, team, battingStyle) {
-    // Your code here
     super(name, age, team);
+
     this.battingStyle = battingStyle;
     this.innings = [];
   }
 
   playInnings(runs, balls) {
-    // Your code here
-    if (runs < 0 || balls <= 0) return null;
+    if (runs < 0 || balls <= 0) {
+      return null;
+    }
 
     const strikeRate = (runs / balls) * 100;
 
@@ -188,8 +186,9 @@ export class Batsman extends Player {
   }
 
   getStrikeRate() {
-    // Your code here
-    if (this.innings.length === 0) return 0;
+    if (this.innings.length === 0) {
+      return 0;
+    }
 
     const totalStrikeRate = this.innings.reduce(
       (sum, innings) => sum + innings.strikeRate,
@@ -200,14 +199,15 @@ export class Batsman extends Player {
   }
 
   getProfile() {
-    // Your code here
     const totalRuns = this.innings.reduce(
       (sum, innings) => sum + innings.runs,
       0,
     );
+
     return {
       ...super.getProfile(),
       battingStyle: this.battingStyle,
+      role: "batsman",
       totalRuns,
       inningsPlayed: this.innings.length,
     };
@@ -216,17 +216,16 @@ export class Batsman extends Player {
 
 export class Bowler extends Player {
   constructor(name, age, team, bowlingStyle) {
-    // Your code here
-
     super(name, age, team);
+
     this.bowlingStyle = bowlingStyle;
     this.spells = [];
   }
 
   bowlSpell(wickets, runsConceded, overs) {
-    // Your code here
-
-    if (wickets < 0 || runsConceded < 0 || overs <= 0) return null;
+    if (wickets < 0 || runsConceded < 0 || overs <= 0) {
+      return null;
+    }
 
     const economy = runsConceded / overs;
 
@@ -237,30 +236,30 @@ export class Bowler extends Player {
       economy,
     };
 
-    this.spell.push(spell);
+    this.spells.push(spell);
 
     return spell;
   }
 
   getEconomy() {
-    // Your code here
-    if (this.spell.length === 0) return 0;
+    if (this.spells.length === 0) {
+      return 0;
+    }
 
     const totalEconomy = this.spells.reduce(
       (sum, spell) => sum + spell.economy,
       0,
     );
 
-    return totalEconomy / this.spells.lenght;
+    return totalEconomy / this.spells.length;
   }
 
   getProfile() {
-    // Your code here
-
     const totalWickets = this.spells.reduce(
       (sum, spell) => sum + spell.wickets,
       0,
     );
+
     return {
       ...super.getProfile(),
       bowlingStyle: this.bowlingStyle,
@@ -273,8 +272,8 @@ export class Bowler extends Player {
 
 export class AllRounder extends Player {
   constructor(name, age, team, battingStyle, bowlingStyle) {
-    // Your code here
     super(name, age, team);
+
     this.battingStyle = battingStyle;
     this.bowlingStyle = bowlingStyle;
     this.innings = [];
@@ -282,7 +281,6 @@ export class AllRounder extends Player {
   }
 
   playInnings(runs, balls) {
-    // Your code here
     if (runs < 0 || balls <= 0) {
       return null;
     }
@@ -301,7 +299,6 @@ export class AllRounder extends Player {
   }
 
   bowlSpell(wickets, runsConceded, overs) {
-    // Your code here
     if (wickets < 0 || runsConceded < 0 || overs <= 0) {
       return null;
     }
@@ -321,7 +318,6 @@ export class AllRounder extends Player {
   }
 
   getStrikeRate() {
-    // Your code here
     if (this.innings.length === 0) {
       return 0;
     }
@@ -335,7 +331,6 @@ export class AllRounder extends Player {
   }
 
   getEconomy() {
-    // Your code here
     if (this.spells.length === 0) {
       return 0;
     }
@@ -349,8 +344,6 @@ export class AllRounder extends Player {
   }
 
   getProfile() {
-    // Your code here
-
     const totalRuns = this.innings.reduce(
       (sum, innings) => sum + innings.runs,
       0,
